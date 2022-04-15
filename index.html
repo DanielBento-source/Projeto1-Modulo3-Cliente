@@ -12,7 +12,7 @@
 <body>
     <section>
 
-        <div class="Home">
+        <header class="Home">
             <div class="Home__header Header">
                 <div class="row">
                     <div class="Header__logo Logo">
@@ -28,23 +28,51 @@
                     </div>
                 </div>
             </div>
-            <h2>Pesquisar paleta</h2>
+
+            <h2>Pesquisar escolhida</h2>
             <div class="paleta-escolhida-espaco">
                 <div id="paleta-escolhida-input-espaco">
                     <input type="number" id="idPaleta" placeholder="Digite o Id da paleta e clique em 'Escolher'" />
                     <button id="idPaletaButton" onclick="findByIdPaletas()">Escolher</button>
                 </div>
+
                 <div id="paletaEscolhida">
 
                 </div>
             </div>
+            <section class="button-modal-create">
+                <button type="button" class="default-button" onclick="abrirModalCadastro()">Cadastrar Paleta</button>
+            </section>
+
+            <section class="modal-overlay" id="overlay">
+
+                <div class="modal">
+
+                    <div class="modal-header">
+                        <h2>Cadastrar uma paleta</h2>
+                        <a onclick="fecharModalCadastro()" class="close-modal">x</a>
+                    </div>
+
+                    <div class="modal-body">
+                        <div>
+                            <input type="text" name="sabor" id="sabor" placeholder="Sabor da Paleta">
+                            <input type="number" name="preco" id="preco" placeholder="Preço da Paleta">
+                            <textarea type="text" name="descricao" id="descricao" placeholder="Descrição da Paleta"
+                                rows="5"></textarea>
+                            <input type="text" name="foto" id="foto" placeholder="Link da Foto da Paleta">
+                            <button onclick="createPaleta()">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <h2>Paletas Disponíveis:</h2>
             <div class="Home__container">
                 <div class="PaletaLista" id="paletaList">
 
                 </div>
             </div>
-        </div>
+        </header>
+
     </section>
 
     <script src="./assets/script.js"></script>
