@@ -10,12 +10,23 @@ async function findAllPaletas() {
             "beforeend",
             `
     <div class="PaletaListaItem">
-        <div>
-            <div class="PaletaListaItem__sabor">${paleta.sabor}</div>
-            <div class="PaletaListaItem__preco">R$ ${paleta.preco}</div>
-            <div class="PaletaListaItem__descricao">${paleta.descricao}</div>
+        <div class="janela-fora">
+            <div class="btn-up">
+                    <div class="PaletaListaItem__buttons">
+                        <button class="btn-EA" onclick="abrirModal(${paleta.id})">Editar</button>
+                        <button class="btn-EA">Apagar</button>
+                    </div>
+            </div>
+            <div class="primeira-janela">
+                <div>
+                    <div class="PaletaListaItem__sabor">${paleta.sabor}</div>
+                    <div class="PaletaListaItem__preco">R$ ${paleta.preco}</div>
+                    <div class="PaletaListaItem__descricao">${paleta.descricao}</div>
+                </div>
+                <img class="PaletaListaItem__foto" src="${paleta.foto}" alt="Paleta de ${paleta.sabor}" />
+                    
+            </div>
         </div>
-        <img class="PaletaListaItem__foto" src="${paleta.foto}" alt="Paleta de ${paleta.sabor}" />
     </div>
     `
         );
@@ -43,11 +54,11 @@ async function findByIdPaletas() {
 
 findAllPaletas();
 
-function abrirModalCadastro() {
+function abrirModal() {
     document.querySelector(".modal-overlay").style.display = "flex";
 }
 
-function fecharModalCadastro() {
+function fecharModal() {
     document.querySelector(".modal-overlay").style.display = "none";
 
     document.querySelector("#sabor").value = "";
@@ -92,5 +103,5 @@ async function createPaleta() {
 
     document.querySelector("#paletaList").insertAdjacentHTML("beforeend", html);
 
-    fecharModalCadastro();
+    fecharModal();
 }

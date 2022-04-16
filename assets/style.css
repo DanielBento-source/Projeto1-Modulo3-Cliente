@@ -77,13 +77,14 @@ html {
 
 .PaletaCardItem,
 .PaletaListaItem {
+  position: relative;
   font-family: 'Exo';
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-  padding: 10px;
   width: 315px;
-  display: flex;
-  justify-content: space-around;
+ 
+  /* padding: 10px;*/
+  /* justify-content: space-around; */
 }
 
 .PaletaCardItem {
@@ -125,8 +126,8 @@ html {
 }
 
 .PaletaListaItem__foto {
-  height: 150px;
-  margin-right: -60px;
+  max-width: 100px;
+  max-height: 150px;
 }
 
 .paleta-escolhida-espaco {
@@ -349,4 +350,66 @@ html {
 .button-modal-create{
   display: flex;
   justify-content: flex-end;
+}
+
+.PaletaListaItem__buttons{
+  width:100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2%;
+}
+
+.primeira-janela {
+  font-family: 'Exo';
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  /* margin-top: 5px;
+  margin-left: 5px;
+  height: 90%;
+  width: 90%; */
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.janela-fora {
+  /* margin-top: 5px;
+  margin-left: 5px; */
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  clip-path: inset(0);
+}
+
+.btn-up{
+  position: absolute;
+  top: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  height: 29%;
+  width: 100%;
+  transition: all 0.5s ease-out;
+}
+
+.janela-fora:hover .btn-up{
+  top: 71%;
+}
+
+.btn-EA{
+  background-color: transparent;
+  border: 2px solid #9400d3;
+  padding: 0.1rem;
+  color: #9400d3;
+  font-weight: 600;
+  border-radius: 0.2rem;
+  width: 40%;
+  margin-top: 2%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-EA:hover {
+  background-color: #9400d3;
+  color: #ffffff;
 }
