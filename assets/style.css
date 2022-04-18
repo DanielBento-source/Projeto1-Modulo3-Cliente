@@ -1,54 +1,44 @@
-@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+@import url("https://fonts.googleapis.com/css?family=Exo:400,700");
 
-*{
-    margin: 0;
-    padding: 0;
-    font-family: Exo, sans-serif;
-}
-
-
-body,
-html {
+* {
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  overflow: auto;
-  background-color: rgb(255, 255, 255);
-  font-family: sans-serif;
+  font-family: Exo, sans-serif;
 }
 
-.Home {
+body{
   position: relative;
   background-image: radial-gradient(
     farthest-corner at 40px 40px,
     #50c5ee 60%,
-    rgba(0, 212, 255, 0.5) 100%
+    #00d4ff80 100%
   );
   min-height: calc(100vh - 60px);
   margin: 15px;
   padding: 15px;
   border-radius: 20px;
-  color: black;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  color: #000000;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3)
+}
+html {
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background-color: #ffffff;
 }
 
-.Home > h2 {
-  display: flex;
-  justify-content: space-around;
-  color: rgb(0, 0, 0);
-}
 
-.Home > div {
+body h2 {
   display: flex;
   justify-content: center;
-  color: rgb(0, 0, 0);
+  color: #000000;
 }
 
 .Home__container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 @media (max-width: 350px) {
@@ -83,14 +73,12 @@ html {
   border-radius: 10px;
   width: 315px;
  
-  /* padding: 10px;*/
-  /* justify-content: space-around; */
 }
 
 .PaletaCardItem {
   margin: 20px 0;
   height: 150px;
-  width: auto;
+  width: 100%;
 }
 
 @media (max-width: 400px) {
@@ -122,7 +110,7 @@ html {
 
 .PaletaCardItem__preco,
 .PaletaListaItem__preco {
-  color: darkviolet;
+  color: #9400d3;
 }
 
 .PaletaListaItem__foto {
@@ -151,7 +139,7 @@ html {
   color: #9400d3;
   font-weight: 600;
   border-radius: 0.2rem;
-  width: 330px;
+  width: 180px;
   margin-top: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -187,7 +175,7 @@ html {
   display: flex;
   align-items: center;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #ffffff4d;
   width: 340px;
   height: 45px;
 }
@@ -195,9 +183,8 @@ html {
 .Logo__titulo {
   position: absolute;
   left: 55px;
-  font-family: "Exo";
   font-weight: 700;
-  font-size: 2.5em;
+  font-size: 2.5rem;
 }
 
 .Logo__icone {
@@ -294,6 +281,7 @@ html {
     #00d4ff80 100%
   );
   padding: 1rem;
+  
 }
 
 .close-modal{
@@ -350,10 +338,12 @@ html {
 .button-modal-create{
   display: flex;
   justify-content: flex-end;
+  margin: 0 auto 25px auto;
+  max-width: 1110px;
 }
 
 .PaletaListaItem__buttons{
-  width:100%;
+  width:95%;
   display: flex;
   justify-content: space-around;
   margin-top: 2%;
@@ -385,7 +375,7 @@ html {
 .btn-up{
   position: absolute;
   top: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   z-index: 2;
   height: 29%;
   width: 100%;
@@ -412,4 +402,94 @@ html {
 .btn-EA:hover {
   background-color: #9400d3;
   color: #ffffff;
+}
+
+.Acoes{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.btn{
+  border: none;
+  border-radius: .3rem;
+  padding: .5rem;
+  max-width: 280px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 48%;
+  
+  transition: all 0.3s ease-in-out;
+}
+
+.Acoes__editar{
+  color:#003cff;
+  border: solid 1px #003cff;
+  background-color: transparent;
+}
+
+.Acoes__editar:hover{
+  color:#fff;
+  background-color: #003cff;
+}
+
+.Acoes__apagar{
+  color:#ff0000;
+  border: solid 1px #ff0000;
+  background-color: transparent;
+}
+
+.Acoes__apagar:hover{
+  color:#fff;
+  background-color: #ff0000;
+}
+
+.modal-body-delete{
+  display: flex;
+  flex-wrap: wrap;
+}
+.modal-body-delete p{
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.btns_delete{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.btn_delete{
+  background-color: transparent;
+  padding: .5rem;
+  font-size: 1.2rem;
+  border-radius: .5rem;
+  width: 30%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn_delete_no{
+  color: #ff0000;
+  border: solid 1px #ff0000;
+}
+
+.btn_delete_no:hover{
+  background-color: #ff0000;
+  color: #fff;
+}
+
+.btn_delete_yes{
+  color: #00b309;
+  border: solid 1px #00b309;
+}
+
+.btn_delete_yes:hover{
+  background-color: #00b309;
+  color: #fff;
 }
