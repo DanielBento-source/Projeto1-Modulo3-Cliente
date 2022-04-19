@@ -118,6 +118,25 @@ body h2 {
   max-height: 150px;
 }
 
+div#paletaEscolhida{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+div#paletaEscolhida .PaletaCardItem{
+  font-family: 'Exo';
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  height: 200px;
+  max-height: 20%;
+  max-width: 80%;
+}
+
+
 .paleta-escolhida-espaco {
   display: flex;
   flex-direction: column;
