@@ -1,4 +1,5 @@
 const baseURL = "http://localhost:3004/paletas";
+const msgAlert = document.querySelector(".msg-alert ")
 
 async function findAllPaletas() {
     const response = await fetch(`${baseURL}/all-paletas`);
@@ -9,12 +10,12 @@ async function findAllPaletas() {
         document.querySelector("#paletaList").insertAdjacentHTML(
             "beforeend",
             `
-            <div class="PaletaListaItem" id="PaletaListaItem_${paleta.id}">
+            <div class="PaletaListaItem" id="PaletaListaItem_${paleta._id}">
             <div class="janela-fora">
                 <div class="btn-up">
                         <div class="PaletaListaItem__buttons">
-                            <button class="btn-EA" onclick="abrirModal(${paleta.id})">Editar</button>
-                            <button class="btn-EA" onclick="abrirModalDelete(${paleta.id})">Apagar</button>
+                            <button class="btn-EA" onclick="abrirModal('${paleta._id}')">Editar</button>
+                            <button class="btn-EA" onclick="abrirModalDelete('${paleta._id}')">Apagar</button>
                         </div>
                 </div>
                 <div class="primeira-janela">
@@ -33,21 +34,40 @@ async function findAllPaletas() {
     });
 }
 
+findAllPaletas();
+
 async function findByIdPaletas() {
     const id = document.querySelector("#idPaleta").value;
 
-    const response = await fetch(`${baseURL}/paleta/${id}`);
+    if (id == "") {
+        localStorage.setItem('message', "Digite um Id para pesquisar!")
+        localStorage.setItem('type', "danger")
+        showMessageAlert();
+        return;
+    }
+
+    const response = await fetch(`${baseURL}/chosen-paleta/${id}`);
     const paleta = await response.json();
+
+
+
+    if (paleta.message != undefined) {
+        localStorage.setItem('message', paleta.message)
+        localStorage.setItem('type', "danger")
+
+        showMessageAlert();
+        return;
+    }
 
     const paletaEscolhidaDiv = document.querySelector("#paletaEscolhida");
 
     paletaEscolhidaDiv.innerHTML = `
-    <div class="PaletaCardItem" id="PaletaListaItem_${paleta.id}">
+    <div class="PaletaCardItem" id="PaletaListaItem_${paleta._id}">
     <div class="janela-fora">
               <div class="btn-up">
                       <div class="PaletaListaItem__buttons">
-                          <button class="btn-EA" onclick="abrirModal(${paleta.id})">Editar</button>
-                          <button class="btn-EA" onclick="abrirModalDelete(${paleta.id})">Apagar</button> 
+                          <button class="btn-EA" onclick="abrirModal('${paleta._id}')">Editar</button>
+                          <button class="btn-EA" onclick="abrirModalDelete('${paleta._id}')">Apagar</button> 
                       </div>
               </div>
               <div class="primeira-janela">
@@ -62,22 +82,22 @@ async function findByIdPaletas() {
   </div>`;
 }
 
-findAllPaletas();
 
-async function abrirModal(id = null) {
-    if (id != null) {
+
+async function abrirModal(id = "") {
+    if (id != "") {
         document.querySelector("#title-header-modal").innerText =
             "Atualizar uma Paleta";
         document.querySelector("#button-form-modal").innerText = "Atualizar";
 
-        const response = await fetch(`${baseURL}/paleta/${id}`);
+        const response = await fetch(`${baseURL}/chosen-paleta/${id}`);
         const paleta = await response.json();
 
         document.querySelector("#sabor").value = paleta.sabor;
         document.querySelector("#preco").value = paleta.preco;
         document.querySelector("#descricao").value = paleta.descricao;
         document.querySelector("#foto").value = paleta.foto;
-        document.querySelector("#id").value = paleta.id;
+        document.querySelector("#id").value = paleta._id;
     } else {
         document.querySelector("#title-header-modal").innerText =
             "Cadastrar uma Paleta";
@@ -89,14 +109,14 @@ async function abrirModal(id = null) {
 
 function fecharModal() {
     document.querySelector(".modal-overlay").style.display = "none";
-    document.querySelector("#id").value = "";
     document.querySelector("#sabor").value = "";
     document.querySelector("#preco").value = 0;
     document.querySelector("#descricao").value = "";
     document.querySelector("#foto").value = "";
 }
 
-async function createPaleta() {
+
+async function submitPaleta() {
     const id = document.querySelector("#id").value;
     const sabor = document.querySelector("#sabor").value;
     const preco = document.querySelector("#preco").value;
@@ -111,9 +131,10 @@ async function createPaleta() {
         foto,
     };
 
-    const modoEdicaoAtivado = id > 0;
+    const modoEdicaoAtivado = id != "";
 
-    const endpoint = baseURL + (modoEdicaoAtivado ? `/update/${id}` : `/create`);
+    const endpoint =
+        baseURL + (modoEdicaoAtivado ? `/update-paleta/${id}` : `/create-paleta`);
 
     const response = await fetch(endpoint, {
         method: modoEdicaoAtivado ? "put" : "post",
@@ -126,34 +147,27 @@ async function createPaleta() {
 
     const novaPaleta = await response.json();
 
-    const html = `
-    <div class="PaletaListaItem" id="PaletaListaItem_${paleta.id}">
-    <div class="janela-fora">
-    <div class="btn-up">
-            <div class="PaletaListaItem__buttons">
-                <button class="btn-EA" onclick="abrirModal(${paleta.id})">Editar</button>
-                <button class="btn-EA" onclick="abrirModalDelete(${paleta.id})">Apagar</button> 
-            </div>
-    </div>
-    <div class="primeira-janela">
-          <div>
-              <div class="PaletaListaItem__sabor">${novaPaleta.sabor}</div>
-              <div class="PaletaListaItem__preco">R$ ${novaPaleta.preco}</div>
-              <div class="PaletaListaItem__descricao">${novaPaleta.descricao}</div>
-          </div>
-      <img class="PaletaListaItem__foto" src="${novaPaleta.foto}" alt="Paleta de ${novaPaleta.sabor}" />
-    </div>
-    </div>
-    </div>`;
+
+    if (novaPaleta.message != undefined) {
+        localStorage.setItem("message", novaPaleta.message);
+        localStorage.setItem("type", "danger");
+        showMessageAlert();
+        return;
+    }
 
     if (modoEdicaoAtivado) {
-        document.querySelector(`#PaletaListaItem_${id}`).outerHTML = html;
+        localStorage.setItem("message", "Paleta atualizada com sucesso");
+        localStorage.setItem("type", "success");
     } else {
-        document.querySelector("#paletaList").insertAdjacentHTML("beforeend", html);
+        localStorage.setItem("message", "Paleta criada com sucesso");
+        localStorage.setItem("type", "success");
     }
+
+    document.location.reload(true);
 
     fecharModal();
 }
+
 
 function abrirModalDelete(id) {
     document.querySelector("#overlay-delete").style.display = "flex";
@@ -170,7 +184,7 @@ function fecharModalDelete() {
 }
 
 async function deletePaleta(id) {
-    const response = await fetch(`${baseURL}/delete/${id}`, {
+    const response = await fetch(`${baseURL}/delete-paleta/${id}`, {
         method: "delete",
         headers: {
             "Content-Type": "application/json",
@@ -180,10 +194,26 @@ async function deletePaleta(id) {
 
     const result = await response.json();
 
-    console.log(result)
+    localStorage.setItem("message", result.message);
+    localStorage.setItem("type", "success");
 
-    document.getElementById("paletaList").innerHTML = ""
+    document.location.reload(true)
 
     fecharModalDelete();
-    findAllPaletas();
 }
+
+function closeMessageAlert() {
+    setTimeout(function () {
+        msgAlert.innerText = "";
+        msgAlert.classList.remove(localStorage.getItem("type"));
+        localStorage.clear();
+    }, 3000);
+}
+
+function showMessageAlert() {
+    msgAlert.innerText = localStorage.getItem("message");
+    msgAlert.classList.add(localStorage.getItem("type"));
+    closeMessageAlert();
+}
+
+showMessageAlert();
