@@ -59,6 +59,9 @@ async function findByIdPaletas() {
         return;
     }
 
+    document.querySelector(".list-all").style.display = "block"
+    document.querySelector(".PaletaLista").style.display = "none"
+
     const paletaEscolhidaDiv = document.querySelector("#paletaEscolhida");
 
     paletaEscolhidaDiv.innerHTML = `

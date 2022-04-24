@@ -552,3 +552,30 @@ div#paletaEscolhida .PaletaCardItem{
   display: none;
   margin-right: 1rem;
 }
+
+#search-input {
+  padding: 0.5rem;
+  width: 315px;
+  border: none;
+  border-radius: 0.2rem;
+  border: 2px solid #fff;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-button {
+  background-color: transparent;
+  border: 2px solid #9400d3;
+  padding: 0.5rem;
+  color: #9400d3;
+  font-weight: 600;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+  text-align: center;
+}
+.search-button:hover {
+  background-color: #9400d3;
+  color: #ffffff;
+}

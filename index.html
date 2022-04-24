@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" type="image/svg" href="./assets/logo.svg">
     <title>El Geladon</title>
 </head>
 
@@ -17,11 +19,9 @@
                 <span class="Logo__titulo"> El Geladon </span>
             </div>
 
-            <div class="Header__opcoes Opcoes">
-                <div class="Opcoes__sacola Sacola">
-                    <img src="./assets/images/icons/sacola.svg" width="40px" class="Sacola__icone"
-                        alt="Sacola de compras" />
-                </div>
+            <div class="search-space">
+                <input type="text" id="search-input" placeholder="Digite o ID da paleta" />
+                <button class="search-button" onclick="findByIdPaletas()"><i class="bi bi-search"></i></button>
             </div>
         </div>
         <section class="options">
@@ -31,16 +31,6 @@
                 <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Paleta</button>
             </div>
         </section>
-        <h2>Pesquisar Paleta</h2>
-        <div class="paleta-escolhida-espaco">
-            <div id="paleta-escolhida-input-espaco">
-                <input type="text" id="idPaleta" placeholder="Digite o ID da paleta e clique em 'Escolher'" />
-                <button class="default-button" onclick="findByIdPaletas()">ESCOLHER</button>
-            </div>
-            <div id="paletaEscolhida">
-
-            </div>
-        </div>
     </header>
     <main>
         <section class="modal-overlay" id="overlay">
@@ -77,10 +67,11 @@
                 </div>
             </div>
         </section>
-        <h2>Paletas Disponíveis:</h2>
+
         <div class="Home__container">
-            <div class="PaletaLista" id="paletaList">
-            </div>
+            <div class="PaletaLista" id="paletaList"></div>
+            <div id="paletaEscolhida"></div>
+        </div>
         </div>
     </main>
 
